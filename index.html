@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SIDOROV ARCHITECTURE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:#f5f5f5;
+color:#111;
+}
+
+.hero{
+height:100vh;
+position:relative;
+padding:42px;
+overflow:hidden;
+border-bottom:1px solid #e8e8e8;
+}
+
+.hero-bg{
+position:absolute;
+inset:0;
+background:url('cover.jpg') center/contain no-repeat;
+opacity:.18;
+}
+
+.nav{
+position:relative;
+z-index:10;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:12px;
+letter-spacing:.08em;
+}
+
+.logo span{opacity:.4;}
+
+.nav-right{
+display:flex;
+gap:42px;
+align-items:center;
+}
+
+.nav-right a{
+color:#111;
+text-decoration:none;
+}
+
+.telegram{
+padding:14px 22px;
+border:1px solid #999;
+}
+
+.hero-content{
+position:relative;
+z-index:5;
+max-width:520px;
+margin-top:120px;
+}
+
+.hero-content h1{
+font-size:76px;
+line-height:.92;
+font-weight:300;
+}
+
+.light{color:#bbb;}
+
+.hero-content p{
+margin-top:26px;
+font-size:18px;
+line-height:1.7;
+color:#666;
+}
+
+.section-title{
+padding:80px 42px 20px;
+font-size:54px;
+font-weight:300;
+border-top:1px solid #e8e8e8;
+}
+
+.projects{
+padding-bottom:40px;
+}
+
+.project{
+display:grid;
+grid-template-columns:180px 1fr;
+gap:30px;
+padding:14px 42px;
+border-bottom:1px solid #ececec;
+}
+
+.meta{
+padding-top:24px;
+}
+
+.num{
+font-size:54px;
+font-weight:300;
+margin-bottom:14px;
+}
+
+.name{
+font-size:22px;
+margin-bottom:12px;
+}
+
+.sub{
+font-size:12px;
+line-height:1.7;
+color:#777;
+}
+
+.frame{
+background:white;
+padding:18px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.frame img{
+max-width:100%;
+height:auto;
+max-height:none;
+object-fit:contain;
+}
+
+.compare{
+position:relative;
+background:white;
+overflow:hidden;
+aspect-ratio:16/8;
+}
+
+.compare img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:contain;
+background:white;
+}
+
+.after{
+clip-path: inset(0 50% 0 0);
+}
+
+.line{
+position:absolute;
+left:50%;
+top:0;
+width:2px;
+height:100%;
+background:white;
+z-index:4;
+}
+
+.compare input{
+position:absolute;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+width:240px;
+z-index:5;
+}
+
+.photoshop-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+padding:0 42px 60px;
+}
+
+.ps-card{
+background:white;
+padding:18px;
+}
+
+.ps-card img{
+width:100%;
+height:auto;
+display:block;
+}
+
+.video-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:0 42px 80px;
+}
+
+.video-card{
+background:white;
+padding:24px;
+min-height:260px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+border:1px solid #ececec;
+}
+
+.video-card h3{
+font-size:24px;
+font-weight:300;
+}
+
+.video-card p{
+font-size:14px;
+line-height:1.8;
+color:#666;
+margin-top:14px;
+}
+
+.filename{
+margin-top:20px;
+font-size:12px;
+letter-spacing:.08em;
+color:#999;
+}
+
+.footer{
+display:flex;
+justify-content:space-between;
+padding:28px 42px;
+font-size:11px;
+color:#777;
+border-top:1px solid #ececec;
+}
+
+@media(max-width:900px){
+.project{
+grid-template-columns:1fr;
+}
+
+.photoshop-grid,
+.video-grid{
+grid-template-columns:1fr;
+}
+
+.hero-content h1{
+font-size:48px;
+}
+}
+
+
+.video-card video{
+width:100%;
+height:auto;
+display:block;
+background:black;
+object-fit:cover;
+margin-bottom:20px;
+}
+
+.video-info h3{
+font-size:24px;
+font-weight:300;
+margin-bottom:12px;
+}
+
+.video-info p{
+font-size:14px;
+line-height:1.8;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="hero-bg"></div>
+
+<div class="nav">
+<div class="logo">SIDOROV <span>ARCHITECTURE</span></div>
+
+<div class="nav-right">
+<a href="#projects">PROJECTS</a>
+<a href="#photoshop">PHOTOSHOP</a>
+<a href="#videos">VIDEO</a>
+<a href="contacts.html">CONTACT</a>
+<a class="telegram" href="https://t.me/serjarchfoto" target="_blank">TELEGRAM</a>
+</div>
+</div>
+
+<div class="hero-content">
+<h1>
+ARCHITECTURE<br>
+THAT RESPECTS<br>
+<span class="light">CONTEXT</span>
+</h1>
+
+<p>
+Архитектура, визуализация и цифровая графика.
+</p>
+</div>
+
+</section>
+
+<section class="projects" id="projects">
+
+    <div class="project">
+    <div class="meta">
+    <div class="num">01</div>
+    <div class="name">PROJECT 1</div>
+    </div>
+
+    <div class="frame">
+    <img src="assets/project_1.jpg">
+    </div>
+    </div>
+    
+    <div class="project">
+    <div class="meta">
+    <div class="num">02</div>
+    <div class="name">PROJECT 2</div>
+    </div>
+
+    <div class="frame">
+    <img src="assets/project_10.jpg">
+    </div>
+    </div>
+    
+    <div class="project">
+    <div class="meta">
+    <div class="num">03</div>
+    <div class="name">PROJECT 3</div>
+    </div>
+
+    <div class="frame">
+    <img src="assets/project_11.jpg">
+    </div>
+    </div>
+    
+    <div class="project">
+    <div class="meta">
+    <div class="num">04</div>
+    <div class="name">PROJECT 4</div>
+    </div>
+
+    <div class="frame">
+    <img src="assets/project_2.jpg">
+    </div>
+    </div>
+    
+<div class="project">
+<div class="meta">
+<div class="num">05</div>
+<div class="name">PROJECT 5 / 6</div>
+<div class="sub">BEFORE / AFTER</div>
+</div>
+
+<div class="compare">
+<img src="assets/project_3.jpg">
+<img class="after" id="after1" src="assets/project_4.jpg">
+<div class="line" id="line1"></div>
+<input type="range" min="0" max="100" value="50" oninput="updateCompare(this.value,'after1','line1')">
+</div>
+</div>
+
+<div class="project">
+<div class="meta">
+<div class="num">06</div>
+<div class="name">PROJECT 7</div>
+</div>
+
+<div class="frame">
+<img src="assets/project_5.jpg">
+</div>
+</div>
+
+<div class="project">
+<div class="meta">
+<div class="num">07</div>
+<div class="name">PROJECT 8 / 9</div>
+<div class="sub">BEFORE / AFTER</div>
+</div>
+
+<div class="compare">
+<img src="assets/project_6.jpg">
+<img class="after" id="after2" src="assets/project_7.jpg">
+<div class="line" id="line2"></div>
+<input type="range" min="0" max="100" value="50" oninput="updateCompare(this.value,'after2','line2')">
+</div>
+</div>
+
+        <div class="project">
+        <div class="meta">
+        <div class="num">08</div>
+        <div class="name">PROJECT 10</div>
+        </div>
+
+        <div class="frame">
+        <img src="assets/project_8.jpg">
+        </div>
+        </div>
+        
+        <div class="project">
+        <div class="meta">
+        <div class="num">09</div>
+        <div class="name">PROJECT 11</div>
+        </div>
+
+        <div class="frame">
+        <img src="assets/project_9.jpg">
+        </div>
+        </div>
+        
+</section>
+
+<section id="photoshop">
+<div class="section-title">PHOTOSHOP</div>
+
+<div class="photoshop-grid">
+
+</div>
+</section>
+
+
+<section id="videos">
+<div class="section-title">VIDEO ANIMATION</div>
+
+<div class="video-grid">
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+<source src="videos/forest-house-motion.mp4" type="video/mp4">
+</video>
+
+<div class="video-info">
+<h3>Forest House Motion</h3>
+<p>
+Кинематографичный пролёт по архитектурной визуализации с акцентом на свет, бетон и природный контекст.
+</p>
+</div>
+
+</div>
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+<source src="videos/interior-atmosphere.mp4" type="video/mp4">
+</video>
+
+<div class="video-info">
+<h3>Interior Atmosphere</h3>
+<p>
+Анимация интерьерного пространства с мягким движением камеры и атмосферным освещением.
+</p>
+</div>
+
+</div>
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+<source src="videos/architectural-sequence.mp4" type="video/mp4">
+</video>
+
+<div class="video-info">
+<h3>Architectural Sequence</h3>
+<p>
+Графическая архитектурная анимация с последовательным раскрытием композиции объекта.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<footer class="footer">
+<div>© 2026 SIDOROV ARCHITECTURE</div>
+<div>@serjarchfoto</div>
+</footer>
+
+<script>
+function updateCompare(value,imgId,lineId){
+document.getElementById(imgId).style.clipPath=`inset(0 ${100-value}% 0 0)`;
+document.getElementById(lineId).style.left=value+'%';
+}
+</script>
+
+</body>
+</html>
