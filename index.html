@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Сидоров — Архитектурная графика</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:#f3f3f0;
+color:#111;
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-track{
+background:#ecece8;
+}
+
+::-webkit-scrollbar-thumb{
+background:#111;
+border-radius:40px;
+}
+
+/* GRAIN */
+
+body::before{
+
+content:'';
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:9999;
+
+opacity:.04;
+
+mix-blend-mode:multiply;
+
+background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+
+}
+
+/* NAV */
+
+.nav{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+
+padding:24px 42px;
+
+display:flex;
+
+justify-content:space-between;
+align-items:center;
+
+background:rgba(243,243,240,.74);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(0,0,0,.05);
+
+z-index:1000;
+
+transition:transform .38s cubic-bezier(.4,0,.2,1);
+
+}
+
+.logo{
+font-size:12px;
+letter-spacing:.12em;
+line-height:1.4;
+}
+
+.logo span{
+opacity:.35;
+}
+
+.nav-right{
+display:flex;
+gap:32px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.nav-right a{
+text-decoration:none;
+color:#111;
+font-size:11px;
+letter-spacing:.14em;
+position:relative;
+}
+
+.nav-right a::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+bottom:-6px;
+
+width:0%;
+height:1px;
+
+background:#111;
+
+transition:.4s;
+
+}
+
+.nav-right a:hover::after{
+width:100%;
+}
+
+.telegram{
+padding:12px 18px;
+border:1px solid rgba(0,0,0,.2);
+}
+
+/* HERO */
+
+.hero{
+
+position:relative;
+
+min-height:100vh;
+
+padding:180px 42px 80px;
+
+overflow:hidden;
+
+border-bottom:1px solid #e6e6e2;
+
+}
+
+.hero-bg{
+
+position:absolute;
+
+inset:0;
+
+background:url('cover.png') center/contain no-repeat;
+
+opacity:.30;
+
+transform:scale(1.04);
+
+animation:floatHero 18s ease-in-out infinite;
+
+}
+
+@keyframes floatHero{
+
+0%{
+transform:translateY(0px) scale(1.04);
+}
+
+50%{
+transform:translateY(-12px) scale(1.06);
+}
+
+100%{
+transform:translateY(0px) scale(1.04);
+}
+
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:720px;
+}
+
+.hero-content h1{
+font-size:112px;
+line-height:.88;
+font-weight:300;
+letter-spacing:-0.08em;
+}
+
+.light{
+color:#bdbdb8;
+}
+
+.hero-content p{
+margin-top:28px;
+font-size:18px;
+line-height:1.8;
+max-width:420px;
+color:#666;
+}
+
+/* HERO BUTTONS */
+
+.hero-buttons{
+
+display:flex;
+
+gap:14px;
+
+margin-top:34px;
+
+flex-wrap:wrap;
+
+}
+
+.hero-btn{
+
+text-decoration:none;
+
+color:#111;
+
+border:1px solid rgba(0,0,0,.18);
+
+padding:14px 22px;
+
+font-size:11px;
+
+letter-spacing:.14em;
+
+transition:.3s;
+
+}
+
+.hero-btn:hover{
+
+background:#111;
+
+color:#f3f3f0;
+
+}
+
+/* TITLES */
+
+.section-title{
+padding:90px 42px 26px;
+font-size:62px;
+font-weight:300;
+letter-spacing:-0.05em;
+border-top:1px solid #e6e6e2;
+}
+
+/* PROJECTS */
+
+.projects{
+padding-bottom:80px;
+}
+
+.project{
+
+display:grid;
+
+grid-template-columns:180px 1fr;
+
+gap:30px;
+
+padding:80px 0;
+
+opacity:0;
+
+transform:translateY(60px);
+
+filter:blur(10px);
+
+transition:1.2s ease;
+
+}
+
+.project.visible{
+
+opacity:1;
+
+transform:translateY(0);
+
+filter:blur(0);
+
+}
+
+.meta{
+padding-left:42px;
+}
+
+.num{
+font-size:74px;
+font-weight:300;
+opacity:.18;
+letter-spacing:-0.05em;
+margin-bottom:10px;
+}
+
+.name{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.sub{
+font-size:12px;
+letter-spacing:.08em;
+color:#888;
+}
+
+.frame{
+padding:0;
+overflow:hidden;
+background:none;
+position:relative;
+contain:layout;
+}
+
+.frame img{
+width:100%;
+display:block;
+transition:transform 1.4s cubic-bezier(.19,1,.22,1);
+}
+
+.project:hover .frame .project-image{
+transform:scale(1.03);
+transform-origin:center center;
+}
+
+/* COMPARE */
+
+.compare{
+position:relative;
+overflow:hidden;
+aspect-ratio:16/8;
+background:#f5f5f5;
+}
+
+.compare img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:contain;
+}
+
+.after{
+clip-path: inset(0 50% 0 0);
+}
+
+.line{
+
+position:absolute;
+
+left:50%;
+top:0;
+
+width:1px;
+height:100%;
+
+background:rgba(255,255,255,.7);
+
+backdrop-filter:blur(4px);
+
+z-index:4;
+
+box-shadow:
+0 0 18px rgba(255,255,255,.35);
+
+}
+
+.compare input{
+
+position:absolute;
+
+left:50%;
+bottom:18px;
+
+transform:translateX(-50%);
+
+width:82%;
+
+appearance:none;
+
+height:1px;
+
+background:rgba(255,255,255,.22);
+
+backdrop-filter:blur(4px);
+
+z-index:6;
+
+border-radius:40px;
+
+outline:none;
+
+}
+
+.compare input::-webkit-slider-thumb{
+
+appearance:none;
+
+width:54px;
+height:54px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.92);
+
+border:1px solid rgba(0,0,0,.04);
+
+backdrop-filter:blur(12px);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08),
+0 2px 8px rgba(0,0,0,.06);
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.compare input::-webkit-slider-thumb:hover{
+
+transform:scale(1.06);
+
+}
+
+/* PHOTOSHOP */
+
+.photoshop-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:4px;
+padding:0 42px 80px;
+}
+
+/* VIDEO */
+
+.video-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:4px;
+padding:0 42px 80px;
+}
+
+.video-card{
+background:#f7f7f4;
+overflow:hidden;
+opacity:0;
+transform:translateY(60px);
+filter:blur(10px);
+transition:1.2s ease;
+}
+
+.video-card.visible{
+opacity:1;
+transform:translateY(0);
+filter:blur(0);
+}
+
+.video-card video{
+width:100%;
+display:block;
+}
+
+.video-info{
+padding:24px;
+}
+
+.video-info h3{
+font-size:24px;
+font-weight:300;
+margin-bottom:14px;
+}
+
+.video-info p{
+font-size:14px;
+line-height:1.8;
+color:#666;
+}
+
+/* FOOTER */
+
+.footer{
+
+padding:80px 42px;
+
+display:flex;
+
+justify-content:space-between;
+
+font-size:11px;
+
+letter-spacing:.12em;
+
+border-top:1px solid #e6e6e2;
+
+}
+
+/* =========================================
+INDIVIDUAL IMAGE SIZE FIXES
+Desktop: задай нужный % для каждого проекта
+========================================= */
+
+/* 01 — Дом у берега (project_1.jpg) */
+#project01 .project-image { width: 100%; }
+
+/* 01 — Птицы (project_1-1.png) — управляется JS */
+
+/* 02 — Смотровой павильон (project_8.jpg) */
+#project02 .project-image { width: 100%; }
+
+/* 02 — Самолёт (project_8-1.png) — управляется JS */
+
+/* 03 — Горный глэмпинг (project_11.jpg) */
+#project03 .frame { display:flex; justify-content:center; }
+#project03 .frame img { width: 50%; }
+
+/* 04 — Интерьер гостиной (project_2.jpg) */
+#project04 .frame { display:flex; justify-content:center; }
+#project04 .frame img { width: 90%; }
+
+/* 05 — Внутренний двор (project_3.jpg + project_4.jpg) */
+/* compare-слайдер — размер задаётся через .compare */
+
+/* 06 — Бунгало (project_5.jpg) */
+#project06 .frame { display:flex; justify-content:center; }
+#project06 .frame img { width: 65%; }
+
+/* 07 — Кофейня (project_6.jpg + project_7.jpg) */
+/* compare-слайдер — размер задаётся через .compare */
+
+/* 08 — Коллаж (project_10.jpg) */
+#project08 .frame { display:flex; justify-content:center; }
+#project08 .project-image { width: 50%; }
+#project08 .scene-plant { width: 50% !important; left: 20% !important; }
+
+/* 09 — Фасад (project_9.jpg) */
+#project09 .frame { display:flex; justify-content:center; }
+#project09 .frame img { width: 90%; }
+
+/* 10 — Музей (project_12.jpg) */
+#project12 .frame { display:flex; justify-content:center; }
+#project12 .project-image { width: 50%; }
+#project12 .floating-balloons { width: 40% !important; left: 50% !important; }
+
+/* =========================================
+MOBILE overrides (max-width: 768px)
+========================================= */
+@media(max-width:768px){
+
+  #project03 .frame img { width: 100%; }
+
+  #project04 .frame img { width: 100%; }
+
+  #project06 .frame img { width: 100%; }
+
+  #project08 .project-image { width: 100%; }
+  #project08 .scene-plant { width: 38% !important; left: -8% !important; }
+
+  #project09 .frame img { width: 100%; }
+
+  #project12 .project-image { width: 100%; }
+  #project12 .floating-balloons { width: 100% !important; left: 50% !important; }
+
+}
+
+/* =========================================
+PROJECT 01 — FLYING BIRDS
+========================================= */
+
+.birds-scene{
+position:relative;
+overflow:hidden;
+}
+
+.flying-birds{
+
+position:absolute;
+
+top:8%;
+left:-18%;
+
+width:32%;
+
+z-index:10;
+
+pointer-events:none;
+
+will-change:transform;
+
+}
+
+/* =========================================
+PROJECT 10 SCENE
+========================================= */
+
+.scene-wrapper{
+position:relative;
+overflow:hidden;
+}
+
+/* РАСТЕНИЕ */
+
+.scene-plant{
+
+position:absolute;
+
+left:-3%;
+bottom:-2%;
+
+width:28%;
+
+z-index:5;
+
+pointer-events:none;
+
+transform-origin: bottom center;
+
+will-change:transform;
+
+animation:
+plantFloat 7s ease-in-out infinite;
+
+}
+
+/* АНИМАЦИЯ */
+
+@keyframes plantFloat{
+
+0%{
+transform:
+translateY(0px);
+}
+
+50%{
+transform:
+translateY(-10px);
+}
+
+100%{
+transform:
+translateY(0px);
+}
+
+}
+
+/* =========================================
+PROJECT 02 — FLYING PLANE
+========================================= */
+
+.plane-scene{
+position:relative;
+overflow:hidden;
+}
+
+.flying-plane{
+
+position:absolute;
+
+top:18%;
+right:-28%;
+
+width:36%;
+
+z-index:10;
+
+pointer-events:none;
+
+will-change:transform;
+
+transition:transform .06s linear;
+
+}
+
+/* =========================================
+PROJECT 12 — FLOATING BALLOONS
+========================================= */
+
+.balloons-scene{
+position:relative;
+overflow:hidden;
+}
+
+.floating-balloons{
+position:absolute;
+left:50%;
+bottom:-12%;
+width:100%;
+transform:translateX(-50%);
+z-index:10;
+pointer-events:none;
+will-change:transform;
+transition:transform .08s linear;
+}
+
+/* =========================================
+MOBILE — max-width: 768px
+========================================= */
+
+@media(max-width:768px){
+
+  /* HERO BUTTONS MOBILE */
+
+.hero-buttons{
+
+margin-top:24px;
+
+gap:10px;
+
+}
+
+.hero-btn{
+
+font-size:10px;
+
+padding:10px 16px;
+
+}
+
+/* NAV */
+
+.nav{
+padding:12px 16px;
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+gap:0;
+transition:transform .38s cubic-bezier(.4,0,.2,1);
+min-height:48px;
+}
+
+.nav.nav--hidden{
+transform:translateY(-100%);
+}
+
+.logo{
+font-size:11px;
+flex-shrink:0;
+}
+
+.nav-right{
+display:flex;
+gap:8px;
+align-items:center;
+flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.nav-right a{
+font-size:9px;
+letter-spacing:.08em;
+}
+
+.telegram{
+padding:6px 10px;
+}
+
+/* HERO */
+
+.hero{
+min-height:100svh;
+padding:72px 16px 36px;
+display:flex;
+align-items:flex-end;
+}
+
+.hero-bg{
+background-size:cover;
+opacity:.18;
+}
+
+.hero-content{
+width:100%;
+max-width:100%;
+}
+
+.hero-content h1{
+font-size:clamp(28px, 9vw, 44px);
+line-height:.92;
+letter-spacing:-0.04em;
+word-break:break-word;
+hyphens:none;
+}
+
+.hero-content p{
+font-size:12px;
+line-height:1.7;
+margin-top:14px;
+max-width:100%;
+color:#666;
+}
+
+/* SECTION TITLES */
+
+.section-title{
+padding:36px 16px 14px;
+font-size:clamp(24px, 8vw, 36px);
+letter-spacing:-0.04em;
+}
+
+/* PROJECTS */
+
+.projects{
+padding-bottom:40px;
+}
+
+.project{
+grid-template-columns:1fr;
+padding:24px 0;
+gap:12px;
+}
+
+.meta{
+padding:0 16px;
+}
+
+.num{
+font-size:36px;
+margin-bottom:6px;
+}
+
+.name{
+font-size:15px;
+margin-bottom:6px;
+}
+
+.sub{
+font-size:11px;
+line-height:1.6;
+}
+
+/* FRAME & IMAGES — no horizontal shift */
+
+.frame{
+width:100%;
+overflow:hidden;
+position:relative;
+contain:layout paint;
+}
+
+.frame img{
+width:100%;
+max-width:100%;
+margin:0;
+display:block;
+transform:none;
+}
+
+.frame .project-image{
+width:100%;
+display:block;
+}
+
+/* Disable hover scale on touch devices */
+@media(hover:none){
+.project:hover .frame .project-image{
+transform:none;
+}
+}
+
+/* COMPARE */
+
+.compare{
+aspect-ratio:4/3;
+}
+
+.compare input{
+width:82%;
+bottom:14px;
+}
+
+/* GRIDS */
+
+.photoshop-grid,
+.video-grid{
+grid-template-columns:1fr;
+padding:0 0 40px;
+gap:2px;
+}
+
+/* VIDEO INFO */
+
+.video-info{
+padding:16px;
+}
+
+.video-info h3{
+font-size:16px;
+margin-bottom:10px;
+}
+
+.video-info p{
+font-size:12px;
+line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+flex-direction:column;
+gap:10px;
+padding:40px 16px;
+font-size:10px;
+}
+
+/* BIRDS MOBILE */
+
+.flying-birds{
+width:48%;
+top:4%;
+left:-24%;
+}
+
+/* PLANT MOBILE */
+
+.scene-plant{
+width:38%;
+left:-8%;
+bottom:-2%;
+transform-origin:bottom center;
+}
+
+/* PLANE MOBILE */
+
+.flying-plane{
+width:46%;
+top:12%;
+right:-36%;
+}
+
+/* BALLOONS MOBILE */
+
+.floating-balloons{
+width:100%;
+left:50%;
+bottom:-6%;
+transform:translateX(-50%);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<div class="nav">
+
+<div class="logo">
+SERJ.ARCH.FOTO<br>
+<span>SIDOROV ARCHITECTURE</span>
+</div>
+
+<div class="nav-right">
+<a href="#photoshop">PHOTOSHOP</a>
+<a href="#videos">ВИДЕО</a>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-bg"></div>
+
+<div class="hero-content">
+
+<h1>
+АРХИТЕКТУРНАЯ<br>
+ГРАФИКА<br>
+<span class="light">ВИЗУАЛЬНЫЙ ЯЗЫК</span>
+</h1>
+
+<p>
+Архитектурная визуализация, цифровая графика и экспериментальная подача. Работы Сидорова Сергея — студента специальности «Архитектура». Автор курса — Петрук Илья. Подробнее — в Telegram-канале ↓
+
+</p>
+
+<div class="hero-buttons">
+
+<a class="hero-btn" href="contacts.html">
+КОНТАКТЫ
+</a>
+
+<a
+class="hero-btn"
+href="https://t.me/serjarchfoto"
+target="_blank"
+>
+TELEGRAM
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PHOTOSHOP -->
+
+<section id="photoshop">
+
+<div class="section-title">
+PHOTOSHOP
+</div>
+
+<div class="photoshop-grid"></div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section class="projects" id="projects">
+
+<!-- PROJECT 01 -->
+
+<div class="project" id="project01">
+
+<div class="meta">
+<div class="num">01</div>
+<div class="name">Дом у берега</div>
+<div class="sub">Первый опыт архитектурной визуализации и работы с атмосферой изображения</div>
+</div>
+
+<div class="frame birds-scene">
+
+<!-- ОСНОВНОЙ КОЛЛАЖ -->
+
+<img
+src="assets/project_1.jpg"
+class="project-image"
+>
+
+<!-- ПТИЦЫ -->
+
+<img
+src="assets/project_1-1.png"
+class="flying-birds"
+id="birdsLayer"
+>
+
+</div>
+
+</div>
+
+<!-- PROJECT 02 -->
+
+<div class="project" id="project02">
+
+
+<div class="meta">
+<div class="num">02</div>
+<div class="name">Смотровой павильон</div>
+<div class="sub">Аксонометрическая подача учебного архитектурного проекта</div>
+</div>
+
+<div class="frame plane-scene">
+<img src="assets/project_8.jpg" class="project-image">
+<img
+  src="assets/project_8-1.png"
+  class="flying-plane"
+  id="planeLayer"
+>
+</div>
+
+</div>
+
+<!-- PROJECT 03 -->
+
+<div class="project" id="project03">
+
+<div class="meta">
+<div class="num">03</div>
+<div class="name">Горный глэмпинг</div>
+<div class="sub">Иллюстрация на основе линейного чертежа с использованием масок, текстур и коллажной техники</div>
+</div>
+
+<div class="frame">
+<img src="assets/project_11.jpg">
+</div>
+
+</div>
+
+<!-- PROJECT 04 -->
+
+<div class="project" id="project04">
+
+<div class="meta">
+<div class="num">04</div>
+<div class="name">Интерьер гостиной</div>
+<div class="sub">Реалистичная визуализация пространства на основе белого рендера</div>
+</div>
+
+<div class="frame">
+<img src="assets/project_2.jpg">
+</div>
+
+</div>
+
+<!-- PROJECT 05 -->
+
+<div class="project" id="project05">
+
+<div class="meta">
+
+<div class="num">05</div>
+
+<div class="name">
+Внутренний двор
+</div>
+
+<div class="sub">
+Трансформация изображения: от линейной графики к атмосферной визуализации
+</div>
+
+</div>
+
+<div class="compare">
+
+<img src="assets/project_3.jpg">
+
+<img
+class="after"
+id="after1"
+src="assets/project_4.jpg"
+>
+
+<div class="line" id="line1"></div>
+
+<input
+type="range"
+min="0"
+max="100"
+value="50"
+oninput="updateCompare(this.value,'after1','line1')"
+>
+
+</div>
+
+</div>
+
+<!-- PROJECT 06 -->
+
+<div class="project" id="project06">
+
+<div class="meta">
+<div class="num">06</div>
+<div class="name">Бунгало</div>
+<div class="sub">Ночная архитектурная сцена с акцентом на свет, линии и атмосферу</div>
+</div>
+
+<div class="frame">
+<img src="assets/project_5.jpg">
+</div>
+
+</div>
+
+<!-- PROJECT 07 -->
+
+<div class="project" id="project07">
+
+<div class="meta">
+
+<div class="num">07</div>
+
+<div class="name">
+Кофейня
+</div>
+
+<div class="sub">
+Процесс преобразования архитектурной графики в финальную подачу
+</div>
+
+</div>
+
+<div class="compare">
+
+<img src="assets/project_6.jpg">
+
+<img
+class="after"
+id="after2"
+src="assets/project_7.jpg"
+>
+
+<div class="line" id="line2"></div>
+
+<input
+type="range"
+min="0"
+max="100"
+value="50"
+oninput="updateCompare(this.value,'after2','line2')"
+>
+
+</div>
+
+</div>
+
+<!-- PROJECT 10 -->
+
+<div class="project cinematic-project" id="project08">
+
+<div class="meta">
+<div class="num">08</div>
+<div class="name">Коллаж</div>
+<div class="sub">Исследование коллажа как инструмента передачи атмосферы и эмоционального восприятия пространства</div>
+</div>
+
+<div class="frame scene-wrapper">
+
+<!-- ФОН -->
+
+<img
+src="assets/project_10.jpg"
+alt="Project 10"
+class="project-image"
+>
+
+<!-- РАСТЕНИЕ -->
+
+<img
+src="assets/project_10-1.png"
+alt=""
+class="scene-plant"
+>
+
+</div>
+
+</div>
+
+<!-- PROJECT 11 -->
+
+<div class="project" id="project09">
+
+<div class="meta">
+<div class="num">09</div>
+<div class="name">Фасад</div>
+<div class="sub">Архитектурная иллюстрация, вдохновлённая японской эстетикой и взаимодействием объекта со средой</div>
+</div>
+
+<div class="frame">
+<img src="assets/project_9.jpg">
+</div>
+
+</div>
+
+</section>
+<!-- PROJECT 12 -->
+
+<div class="project cinematic-project" id="project12">
+
+<div class="meta">
+<div class="num">10</div>
+<div class="name">Музей</div>
+<div class="sub">Работа с архитектурным объектом в ландшафте, изучение плановости, атмосферы и авторской стилизации изображения</div>
+</div>
+
+<div class="frame balloons-scene">
+
+<img
+src="assets/project_12.jpg"
+alt="Project 12"
+class="project-image"
+>
+
+<img
+src="assets/project_12-1.png"
+alt=""
+class="floating-balloons"
+id="balloonsLayer"
+>
+
+</div>
+
+</div>
+
+<!-- VIDEO -->
+
+<section id="videos">
+
+<div class="section-title">
+ВИДЕО
+</div>
+
+<div class="video-grid">
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+
+<source
+src="videos/forest-house-motion.MP4"
+type="video/MP4"
+>
+
+</video>
+
+<div class="video-info">
+
+<h3>
+Архитектурная анимация в Photoshop
+</h3>
+
+<p>
+Работа с фасадной графикой, текстурами, светом и цветом в формате анимации
+</p>
+
+</div>
+
+</div>
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+
+<source
+src="videos/interior-atmosphere.MP4"
+type="video/MP4"
+>
+
+</video>
+
+<div class="video-info">
+
+<h3>
+Атмосфера экстерьерьера
+</h3>
+
+<p>
+Процесс создания анимации на основе белой модели и анимированного окружения
+</p>
+
+</div>
+
+</div>
+
+<div class="video-card">
+
+<video autoplay muted loop playsinline controls preload="metadata">
+
+<source
+src="videos/architectural-sequence.MP4"
+type="video/MP4"
+>
+
+</video>
+
+<div class="video-info">
+
+<h3>
+Архитектурная последовательность
+</h3>
+
+<p>
+Анимация архитектурной графики и последовательная работа со слоями, анимация с использованием Veo 3
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div>
+© 2026 SIDOROV ARCHITECTURE
+</div>
+
+<div>
+@serjarchfoto
+</div>
+
+</footer>
+
+<script>
+
+/* NAV SCROLL HIDE/SHOW (mobile) */
+
+(function(){
+  let lastY = 0;
+  const nav = document.querySelector('.nav');
+
+  window.addEventListener('scroll', () => {
+    if(window.innerWidth > 768) return;
+    const currentY = window.scrollY;
+    if(currentY > lastY && currentY > 60){
+      nav.classList.add('nav--hidden');
+    } else {
+      nav.classList.remove('nav--hidden');
+    }
+    lastY = currentY;
+  }, {passive: true});
+})();
+
+/* COMPARE */
+
+function updateCompare(value,imgId,lineId){
+
+document.getElementById(imgId).style.clipPath=
+`inset(0 ${100-value}% 0 0)`;
+
+document.getElementById(lineId).style.left=
+value+'%';
+
+}
+
+/* OBSERVER */
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add('visible');
+
+}
+
+});
+
+},{threshold:0.12});
+
+document
+.querySelectorAll('.project,.video-card,.ps-card')
+.forEach(el=>observer.observe(el));
+
+/* HERO PARALLAX */
+
+window.addEventListener('scroll',()=>{
+
+const scroll = window.scrollY;
+
+document.querySelector('.hero-bg').style.transform =
+`translateY(${scroll * 0.12}px) scale(1.05)`;
+
+});
+
+/* =========================================
+FLYING BIRDS SCROLL ANIMATION
+========================================= */
+
+const birds =
+document.getElementById('birdsLayer');
+
+const birdsProject =
+document.getElementById('project01');
+
+window.addEventListener('scroll',()=>{
+
+const rect =
+birdsProject.getBoundingClientRect();
+
+const windowHeight =
+window.innerHeight;
+
+/* ПРОГРЕСС */
+
+const progress =
+(windowHeight - rect.top) /
+(windowHeight + rect.height);
+
+/* LIMIT */
+
+const limited =
+Math.max(0, Math.min(progress,1));
+
+/* MOVE */
+
+const moveX = limited * 900;
+
+const moveY = limited * -120;
+
+/* APPLY */
+
+birds.style.transform =
+`translate(${moveX}px, ${moveY}px)`;
+
+});
+
+/* =========================================
+BALLOONS SCROLL ANIMATION
+========================================= */
+
+const balloons = document.getElementById('balloonsLayer');
+const balloonsProject = document.getElementById('project12');
+
+window.addEventListener('scroll', () => {
+
+  if (!balloons || !balloonsProject) return;
+
+  const rect = balloonsProject.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  // Сдвигаем старт: анимация начинается когда проект уже виден на 30%
+  const rawProgress =
+    (windowHeight - rect.top) /
+    (windowHeight + rect.height);
+
+  // Смещаем начало на 0.3 → анимация стартует позже
+  const progress = (rawProgress - 0.3) / 0.7;
+
+  const limited = Math.max(0, Math.min(progress, 1));
+
+  const moveY = limited * -900;
+  // Сохраняем центрирование translateX(-50%) + добавляем горизонтальный дрейф
+  const moveX = limited * 60;
+
+  balloons.style.transform = `translateX(calc(-50% + ${moveX}px)) translateY(${moveY}px)`;
+
+});
+
+/* =========================================
+PLANE SCROLL ANIMATION — справа налево
+========================================= */
+
+const plane = document.getElementById('planeLayer');
+const planeProject = document.getElementById('project02');
+
+window.addEventListener('scroll', () => {
+
+  if (!plane || !planeProject) return;
+
+  const rect = planeProject.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  const progress =
+    (windowHeight - rect.top) /
+    (windowHeight + rect.height);
+
+  const limited = Math.max(0, Math.min(progress, 1));
+
+  // Самолёт летит справа налево: начинает справа за кадром, улетает влево
+  const moveX = limited * -160;
+  const moveY = limited * 20; // лёгкое снижение
+
+  plane.style.transform = `translate(${moveX}%, ${moveY}px)`;
+
+});
+
+</script>
+</html>
